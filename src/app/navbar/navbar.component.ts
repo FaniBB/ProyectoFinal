@@ -49,13 +49,15 @@ export class NavbarComponent implements OnInit {
     nombre: new FormControl(''),
     direc: new FormControl(''),
     pasword: new FormControl(''),
+    pasword2: new FormControl('')
   });
   registroFormAdv = new FormGroup({
     email: new FormControl(''),
     nombre: new FormControl(''),
-    pasword: new FormControl(''),
     direc: new FormControl(''),
-    rango: new FormControl('')
+    rango: new FormControl(''),
+    pasword: new FormControl(''),
+    pasword2: new FormControl('')
   });
   inicioForm = new FormGroup({
     email: new FormControl(''),
@@ -106,7 +108,7 @@ export class NavbarComponent implements OnInit {
   }
   
   onRegister(){
-    const {email,nombre,pasword,direc} = this.registroForm.value;
+    const {email,nombre,direc,pasword} = this.registroForm.value;
     let usr: usuario={
       $key:"A",
       email:email,
@@ -126,7 +128,7 @@ export class NavbarComponent implements OnInit {
     }, 500);
   }
   onRegisterPlus(){
-    const {email,nombre,pasword,direc,rango} = this.registroFormAdv.value;
+    const {email,nombre,direc,rango,pasword} = this.registroFormAdv.value;
     let usr: usuario={
       $key:"A",
       email:email,
