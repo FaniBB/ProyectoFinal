@@ -1,4 +1,7 @@
-<app-navbar></app-navbar>
-  <div class="container mt-5">
-    <router-outlet></router-outlet>
-  </div>
+<body style="height: 100%; background-color:{{nav.accesForm.get('color').value}}; font-size:{{nav.accesForm.get('size').value}};font-family:{{nav.accesForm.get('type').value}}">
+    <app-navbar #nav></app-navbar>
+    <br><br><br>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+</body>

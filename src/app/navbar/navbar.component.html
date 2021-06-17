@@ -1,13 +1,10 @@
 <nav class="navbar navbar-expand-md navbar-dark" id="FondNavbar">
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="['home']">Home</a>
+                <a class="nav-link" [routerLink]="['home']"><img src="./../../Log02.png" alt=""> PepeForeans</a>
             </li>
             <li class="nav-item" routerLinkActive="active" *ngIf="isAdmin">
                 <a class="nav-link" [routerLink]="['productos']">Productos</a>
@@ -20,24 +17,74 @@
             </li>
         </ul>
         
-        <div class="form-inline my-2 my-lg-0">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item" *ngIf="!isLogued">
-                    <a  class="nav-link" data-toggle="modal" data-target="#logUpModal" href="#logUpModal">Registrarse</a>
-                </li>
-                <li class="nav-item" *ngIf="isAdmin">
-                    <a  class="nav-link" data-toggle="modal" data-target="#logUpModalAdv" href="#logUpModalAdv">Registrar Cuenta</a>
-                </li>
-                <li class="nav-item" *ngIf="!isLogued">
-                    <a  class="nav-link" data-toggle="modal" data-target="#logInModal" href="#logInModal">Iniciar secion</a>
-                </li>
-                <li class="nav-item" *ngIf="isLogued">
-                    <a  class="nav-link" data-toggle="modal" data-target="#logOutModal" href="#logOutModal">Cerrar sesión</a>
-                </li>
-            </ul>
-        </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="isLoad">
+        <ul class="navbar-nav mr-auto">
+            <div class="spinner-grow text-light" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <li class="nav-item" routerLinkActive="active" >
+                <a class="nav-link">Cargando......</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngIf="!isLogued">
+                <a  class="nav-link" data-toggle="modal" data-target="#logUpModal" href="#logUpModal">Registrarse</a>
+            </li>
+            <li class="nav-item" *ngIf="isAdmin">
+                <a  class="nav-link" data-toggle="modal" data-target="#logUpModalAdv" href="#logUpModalAdv">Registrar Cuenta</a>
+            </li>
+            <li class="nav-item" *ngIf="!isLogued">
+                <a  class="nav-link" data-toggle="modal" data-target="#logInModal" href="#logInModal">Iniciar secion</a>
+            </li>
+            <li class="nav-item" *ngIf="isLogued">
+                <a  class="nav-link" data-toggle="modal" data-target="#logOutModal" href="#logOutModal">Cerrar sesión</a>
+            </li>
+            <li class="nav-item" *ngIf="isLogued">
+                <a  class="nav-link" data-toggle="modal" data-target="#accesModal" href="#accesModal"><img src="./../../acces.png" alt="Accesibilidad"></a>
+            </li>
+        </ul>
     </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal" id="accesModal" tabindex="-1" role="dialog" aria-labelledby="accesModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Desea cerrar secion?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="accesForm" (ngSubmit)="onChange()">
+                    <div class="form-group">
+                        <label>Color de fondo</label>
+                        <input type="color" class="form-control" formControlName="color" value="#000000">
+                    </div>
+                    <div class="form-group">
+                        <label>Tamaño de letra</label>
+                        <input type="number" class="form-control" formControlName="size" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Tamaño de letra</label>
+                        <select class="form-control" formControlName="type">
+                            <option value="'Courier New', Courier, monospace">Courier New, Courier, monospace</option>
+                            <option value="'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Franklin Gothic Medium</option>
+                            <option value="'Times New Roman', Times, serif">Times New Roman</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal -->
 <div class="modal" id="logOutModal" tabindex="-1" role="dialog" aria-labelledby="logOutModal" aria-hidden="true">
@@ -50,7 +97,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="cierreForm" (ngSubmit)="onLogOut()">
+                <form (ngSubmit)="onLogOut()">
                     <button type="submit" class="btn btn-primary mb-2">Cerrar secion</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
@@ -79,6 +126,9 @@
                         <label>Contraseña</label>
                         <input type="password" class="form-control" placeholder="Contraseña" formControlName="pasword">
                     </div>
+                    <div class="alert alert-warning" role="alert" *ngIf="this.loguinError">
+                        <strong>Error!</strong> El e-mail o la contrseña no son validos.
+                    </div>
                     <button type="submit" class="btn btn-primary mb-2" >Iniciar secion</button>
                 </form>
             </div>
@@ -106,6 +156,10 @@
                     <div class="form-group">
                         <label>Nombre</label>
                         <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+                    </div>
+                    <div class="form-group">
+                        <label>Direccion</label>
+                        <input type="text" class="form-control" placeholder="Direccion" formControlName="direc">
                     </div>
                     <div class="form-group">
                         <label>Contraseña</label>
@@ -147,6 +201,10 @@
                         <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
                     </div>
                     <div class="form-group">
+                        <label>Direccion</label>
+                        <input type="text" class="form-control" placeholder="Direccion" formControlName="direc">
+                    </div>
+                    <div class="form-group">
                         <label>Contraseña</label>
                         <input type="password" class="form-control" placeholder="Contraseña" formControlName="pasword">
                     </div>
@@ -158,7 +216,10 @@
                         <option value=3>Cliente</option>
                         </select>
                     </div>
-
+                    <div class="alert alert-warning" role="alert" *ngIf="this.registroError">
+                        <strong>Error!</strong> El e-mail o la contrseña no son validos.
+                    </div>
+                    <hr>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary mb-2" >Registrarse</button>
                     </div>

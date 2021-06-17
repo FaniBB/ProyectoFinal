@@ -18,6 +18,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { ControlService } from './base/service/control.service';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ComprasComponent } from './compras/compras.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { PreguntasComponent } from './preguntas/preguntas.component';
+import { UserPageComponent } from './user-page/user-page.component';
 
 
 @NgModule({
@@ -28,6 +31,9 @@ import { ComprasComponent } from './compras/compras.component';
     ProductosComponent,
     PedidosComponent,
     ComprasComponent,
+    ContactoComponent,
+    PreguntasComponent,
+    UserPageComponent,
   ],
   imports: [
     BrowserModule,

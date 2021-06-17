@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <h4 class="test-center">Lista de productos</h4>
                     <br><br>
-                    <table class="table table-sm table-hover">
+                    <table class="table table-sm table-hover" *ngIf="!isLoad">
                         <tbody>
                             <tr *ngFor="let prod of productoList">
                               <td><img src="{{prod.imagen}}" height="130px" width="130px"></td>
@@ -18,7 +18,10 @@
                               </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table>     
+                    <div class="spinner-border text-secondary" role="status" *ngIf="isLoad">
+                      <span class="sr-only">Loading...</span>
+                    </div>
                 </div>
             </div>
 

@@ -22,6 +22,7 @@ export class ProductosComponent implements OnInit {
   edit:string='display:none';
   added:string='';
   editKey='';
+  public isLoad=false;
 
   
   uploadPercent: Observable<number>;    
@@ -30,6 +31,7 @@ export class ProductosComponent implements OnInit {
   constructor(public controlServ: ControlService, private storage: AngularFireStorage) { }
 
   ngOnInit(): void {
+    this.isLoad=true;
     this.controlServ.getProducts().snapshotChanges().subscribe(item =>{
       this.productoList=[];
       item.forEach(element => {
@@ -38,6 +40,7 @@ export class ProductosComponent implements OnInit {
         this.productoList.push(x as producto);
       });
     });
+    this.isLoad=false;
   }
 
   async onChange(e){
@@ -45,7 +48,6 @@ export class ProductosComponent implements OnInit {
     const file=e.target.files[0];
     const filePath='Products/product_'+ID+".jpg";
     const URL=await this.upload(file,filePath);
-    console.log("<HOOOOOOOOOOOOLOOOOOOOOOOOO.....................",URL);
     this.productoForm.get("imagen").setValue(URL);
   }
   upload(file:any,path:string): Promise<string>{

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/service/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public user:any;
+  public isLoged=false;;
 
-  ngOnInit(): void {
+  constructor(private authSvc: AuthService) { }
+
+  async ngOnInit(){
+    this.user = await this.authSvc.getCurrentUser();
+    if(this.user){
+      this.isLoged=true;
+    }
   }
 
 }

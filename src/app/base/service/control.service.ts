@@ -42,6 +42,7 @@ export class ControlService {
       email: usr.email,
       nombre: usr.nombre,
       password: usr.password,
+      direc: usr.direc,
       rango: usr.rango
     })
   }
@@ -50,6 +51,7 @@ export class ControlService {
       email: usr.email,
       nombre: usr.nombre,
       password: usr.password,
+      direc: usr.direc,
       rango: usr.rango
     });
   }
@@ -93,6 +95,7 @@ export interface usuario{
   email: string;
   nombre: string;
   password: string;
+  direc: string;
   rango: number;
 }
 export interface pedido{

@@ -12,11 +12,13 @@ export class ComprasComponent implements OnInit {
   carrito: producto[]=[];
   pedidos: pedido[];
   delete: producto;
+  public isLoad=false;
 
   constructor(public controlServ: ControlService) { }
 
-  ngOnInit(): void {
-    
+ngOnInit(){
+  this.isLoad=true;
+    console.log(this.isLoad);
     this.controlServ.getProducts().snapshotChanges().subscribe(item =>{
       this.productoList=[];
       item.forEach(element => {
@@ -36,8 +38,9 @@ export class ComprasComponent implements OnInit {
 
     setTimeout( () => {
       this.selecDell(this.productoList[0]);
+      this.isLoad=false;
+      console.log(this.isLoad);
     }, 1000);
-    
   }
 
   addCarrito(key:string){

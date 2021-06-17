@@ -9,25 +9,28 @@ import { Router } from '@angular/router'
 export class AuthService {
 
   public errorA=false;
+  public errorB=false;
   public User
 
   constructor(public afAuth: AngularFireAuth, private router: Router) { }
-  getError():boolean{
+  getErrorA():boolean{
     return this.errorA;
   }
+  getErrorB():boolean{
+    return this.errorB;
+  }
+
   async login(email: string, pasword: string){
     try{
       const result = await this.afAuth.signInWithEmailAndPassword(email, pasword);
-
+      this.errorB=false;
     }catch(error){
-      console.log(error);
+      this.errorB=true;
     }
   }
   async register(email: string, pasword: string){
     try{
       const result = await this.afAuth.createUserWithEmailAndPassword(email, pasword);
-      const result2 = await this.afAuth.signInWithEmailAndPassword(email, pasword);
-
       this.errorA=false;
     }catch(error){
       this.errorA=true;
