@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="test-center">Lista de productos</h4>
+                    <br><br>
+                    <table class="table table-sm table-hover">
+                        <tbody>
+                            <tr *ngFor="let prod of productoList">
+                              <td><img src="{{prod.imagen}}" height="130px" width="130px"></td>
+                              <td>{{prod.nombre}}</td>
+                              <td>{{prod.tiempo}}min</td>
+                              <td>{{prod.precio}}</td>
+                              <td>
+                                  <button class="btn btn-primary text-white" (click)="addCarrito(prod.$key)">Añadir al carrito</button>
+                              </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <br><br><br>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="test-center">Carrito</h4>
+                    <br><br>
+                    <table class="table table-sm table-hover">
+                        <tbody>
+                            <tr *ngFor="let prod of carrito">
+                              <td><img src="{{prod.imagen}}" height="130px" width="130px"></td>
+                              <td>{{prod.nombre}}</td>
+                              <td>{{prod.tiempo}}min</td>
+                              <td>{{prod.precio}}</td>
+                              <td>
+                                  <button class="btn btn-danger text-white" (click)="selecDell(prod)" data-toggle="modal" data-target="#eliminar">Eliminar del carrito</button>
+                              </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-danger text-white" data-toggle="modal" data-target="#vaciar">Vaciar Carrito</button>
+                    <button class="btn btn-primary text-white" (click)="pedido()">Pagar Carrito</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+ <!-- Modal -->
+ <div class="modal" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenteredLabel">Advertencia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Seguro que deceas eliminar el producto {{delete.nombre}} del carrito 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="dellCarrito()" data-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Modal -->
+   <div class="modal" id="vaciar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenteredLabel">Advertencia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Seguro que deceas eliminar todos los elementos del carrito
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="vaciarCarrito()" data-dismiss="modal">Vaciar</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,27 @@
+.centrar{
+    text-align: center;
+}
+
+#jtho{
+    background-image: url("./../../../src/Titulo.jpg");
+    border-radius: 5px;
+}
+#ComAppTit{
+    font-family: 'Krona One', sans-serif;
+    color: rgb(195, 255, 251);
+}
+#EstaesText{
+    font-family: 'Titillium Web', sans-serif;
+    color: #dbff79;
+    font-size: 30px;
+    
+}
+.cont{
+    border-radius: 15px;
+    border: rgb(71, 71, 71) 1px solid;
+    padding: 50px;
+    background-color: rgba(119, 119, 119, 0.356);;
+}
+h4{
+   text-align: center;
+}

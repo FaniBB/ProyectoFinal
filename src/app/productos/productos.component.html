@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="productoForm">
+                        <div class="form-group">
+                            Nombre del producto
+                            <input type="text" required class="form-control" name="name" formControlName="name" placeholder="Nombre del producto">
+                        </div>
+                        <div class="form-group">
+                            Imagen del producto
+                            <input type="file" required accept=".jpg" (change)="onChange($event)" class="form-control" placeholder="Imagen del producto">
+                            <input type="hidden" disabled  name="imagen" formControlName="imagen" placeholder="Imagen del producto">
+                        </div>
+                        <div class="form-group">
+                            Precio del producto 
+                            <input type="number" required class="form-control" name="price" formControlName="price" placeholder="Precio del producto" min="0">
+                        </div>
+                        <button type="submit" [style]="added" class="btn btn-primary mb-2" (click)="onADD()">Añadir</button>
+                        <button type="submit" [style]="edit" class="btn btn-primary mb-2" (click)="onUpdate()">Editar</button>
+                        <br>
+                        <button type="submit" class="btn btn-secondary mb-2" (click)="resertForm()">Limpiar</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lr-5 text-center">
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="test-center">Lista de productos</h4>
+                    <br><br>
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <td></td>
+                            <td>Nombre Del producto</td>
+                            <td>Precio ($)</td>
+                            <td></td>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let prod of productoList">
+                                <td><img src="{{prod.imagen}}" height="60px" width="60px"></td>
+                                <td>{{prod.nombre}}</td>
+                                <td>{{prod.precio}}</td>
+                                <td>
+                                    <button [style]="added" class="btn btn-secondary text-white" (click)="onEdit(prod)">Editar</button>
+                                    <button [style]="added" class="btn btn-danger text-white" (click)="onDell(prod.$key)" data-toggle="modal" data-target="#exampleModalCentered">Eliminar</button>
+                                    <button [style]="edit" class="btn btn-primary text-white" (click)="onRestart()">Cancelar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+  
+  <!-- Modal -->
+  <div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenteredLabel">Advertencia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Seguro que deceas eliminar el producto {{editKey}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="onDelete()" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

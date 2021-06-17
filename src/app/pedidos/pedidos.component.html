@@ -1,0 +1,43 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="test-center">Pedidos</h4>
+        <br><br>
+        <table class="table table-sm table-hover">
+            <tbody>
+                <tr *ngFor="let ped of pedidosList">
+                    <td>{{ped.key}}</td>
+                    <td>{{ped.usuario.email}}</td>
+                    <td *ngFor="let x of ped.productos as producto">
+                        {{x.nombre}}
+                    </td>
+                    <td>
+                        {{ped.costoTotal}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger text-white" (click)="onComplet(ped)" data-toggle="modal" data-target="#eliminar">completar Pedido</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+ <!-- Modal -->
+ <div class="modal" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenteredLabel">Advertencia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Esta por completar el pedido {{ completPed.key}}. <br>Esta accion no tiene forma de revertirse. 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="complet(completPed.key)" data-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>

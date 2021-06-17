@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "prueba-login-79639": {
+      "hosting": {
+        "WEB": [
+          "prueba-login-79639"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "prueba-login-79639"
+  }
+}
