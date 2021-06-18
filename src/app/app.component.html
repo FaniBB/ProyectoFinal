@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>Gráficos Dinámicos en Angular</h1>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <div style="display: block;">
+      <canvas baseChart width="400" height="400"
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [colors]="barChartColors"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"
+                  class="chart-bar"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6" style="margin-bottom: 10 px">
+      <table class="table table-responsive table-condensed">
+        <tr>
+          <th *ngFor="let label of barChartLabels">{{label}}</th>
+        </tr>
+        <tr *ngFor="let d of barChartData">
+          <td *ngFor="let label of barChartLabels; let j=index">{{d && d.data[j]}}</td>
+        </tr>
+      </table>
+      <button (click)="randomize()">Click</button>
+    </div>
+  </div>
+</div>
